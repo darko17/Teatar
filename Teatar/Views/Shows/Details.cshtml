@@ -1,0 +1,30 @@
+﻿@model Teatar.Models.Show
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details </h2>
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    <div class="row">
+        <div class="col-lg-3">
+            <img src="@Url.Content(Model.ImgUrl)" alt="Image" width="200px" height="300px" />
+        </div>
+        <div class="col-lg-9" style="height:300px">
+            <b class="text-info ">Description </b>   @Html.DisplayFor(model => model.Description)<br />
+            <b class="text-info">Rating </b> @Html.DisplayFor(model => model.Rating)<br />
+            <b class="text-info">Duration </b>  @Html.DisplayFor(model => model.Duration)  minutes<br />
+            <b class="text-info">Price for ticket </b>  @Html.DisplayFor(model => model.PriceForTicket) denars<br />
+            @if (User.IsInRole("Editor"))
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ShowId }) |
+                </p>
+            }
+            @Html.ActionLink("Back to the list", "Index")<br />
+            <button style="position:absolute ; bottom:0 ; right:0" class=" btn-link">@Html.ActionLink("Time table for shows", "Index", "Timetables") </button>
+
+        </div>
+
+    </div>
+</div>

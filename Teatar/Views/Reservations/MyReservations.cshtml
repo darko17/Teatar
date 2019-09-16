@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Teatar.Models.Reservation>
+@{
+    ViewBag.Title = "PrintReservations";
+}
+<h2>My Reservations</h2>
+<table class="table">
+    <tr>
+        <th>
+            Projection number
+        </th>
+        <th>
+            Number of cards
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeTableId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumOfTickets)
+        </td>
+
+
+    </tr>
+}
+</table>

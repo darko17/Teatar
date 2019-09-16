@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Teatar.Models.Show>
+@{
+    ViewBag.Title = "Index";
+}
+<h2> All shows </h2>
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
+    <p>
+        @Html.ActionLink("Create new show", "Create")
+    </p>
+}
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr class="row">
+            <td class="col-sm-3">
+                <img src="@Url.Content(item.ImgUrl)" alt="Image" width="200" height="300" />
+            </td>
+            <td class="col-sm-9">
+                <h2>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h2>
+                @Html.DisplayFor(modelItem => item.Genre.Name)<br />
+                Rating   :  @Html.DisplayFor(modelItem => item.Rating)<br />
+                @Html.DisplayFor(modelItem => item.Duration)  minutes <br />
+                Price for ticket   :  @Html.DisplayFor(modelItem => item.PriceForTicket)<br />
+                @if (User.IsInRole("Editor") || User.IsInRole("Admin"))
+                {
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ShowId }) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ShowId }) |
+                    </p>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ShowId })
+            </td>
+        </tr>
+    }
+</table>

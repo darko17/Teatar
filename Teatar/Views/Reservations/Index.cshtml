@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Teatar.Models.Reservation>
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create new reservation", "Create")
+    </p>
+}
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Number of projection
+        </th>
+        <th>
+            Number of cards
+        </th>
+        <th>
+            User
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeTableId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfTickets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicatinUserId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReservationId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ReservationId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReservationId })
+            </td>
+        </tr>
+    }
+</table>

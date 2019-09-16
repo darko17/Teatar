@@ -1,0 +1,39 @@
+﻿@model Teatar.Models.Reservation
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+<h3> Are you sure you want to delete it? </h3>
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Number of projection
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TimeTableId)
+        </dd>
+        <dt>
+            Number of tickets
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfTickets)
+        </dd>
+        <dt>
+            User
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicatinUserId)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to the list", "Index")
+        </div>
+    }
+</div>

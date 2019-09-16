@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Teatar.Models.TimeTable>
+@{
+    ViewBag.Title = "Home Page";
+    double max = 0;
+    var maxShow = "";
+    var maxShowId = 0;
+    var cheapShowId = 0;
+    foreach (var item in Model)
+    {
+        if (item.Show.Rating >= max)
+        {
+            max = item.Show.Rating;
+            maxShow = item.Show.ImgUrl;
+            maxShowId = item.Show.ShowId;
+        }
+    }
+    int min = 10000;
+    var minCena = "";
+    foreach (var item in Model)
+    {
+        if (item.Show.PriceForTicket <= min)
+        {
+            min = item.Show.PriceForTicket;
+            minCena = item.Show.ImgUrl;
+            cheapShowId = item.Show.ShowId;
+        }
+    }
+
+}
+<br />
+<br />
+<div class="container">
+    <div class="row">
+            <div class="col-md-5 panel panel-default panel-body" style="text-align:center;">
+                <div class=" col-md-12">Most popular show by rating</div>
+                <br />
+                <br />
+                <a href="@Url.Action("Details", "Shows" , new { id = maxShowId })">
+                    <img src="@Url.Content(maxShow)" alt="Image" width="200" height="300" />
+                </a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5  panel panel-default panel-body" style="text-align:center">
+                <div class=" col-md-12"> Cheapest Show </div>
+                <br />
+                <br />
+                <a href="@Url.Action("Details", "Shows",new { id = cheapShowId } )">
+                    <img src="@Url.Content(minCena)" alt="Image" width="200" height="300" />
+                </a>
+            </div>
+    </div>
+    <br />
+    <div class="jumbotron" style="text-align:center ; font-size:30px"> Shows today </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (item.Time.Date == DateTime.Today.Date)
+            {
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="@Url.Content(item.Show.ImgUrl)" alt="...">
+                    <div class="caption">
+                        <h3>@item.Show.Title</h3>
+                        <p>@item.Show.Description</p>
+                        <p><a href="@Url.Action("Details", "Shows",new { id = item.Show.ShowId } )" class="btn btn-info" role="button">Details</a> </p>
+                    </div>
+                </div>
+             </div>
+
+            }
+        }
+    </div>
+
+</div>
+
